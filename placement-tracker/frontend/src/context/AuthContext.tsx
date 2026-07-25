@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
+import { getSession, setSession, encodeSessionToken } from '../services/dataStore';
 
 interface User {
   id: string;
@@ -23,17 +24,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Try silent refresh on mount
   useEffect(() => {
-    api.post<{ token: string }>('/auth/refresh')
-      .then(({ data }) => {
-        setToken(data.token);
-        // Decode role from JWT payload (middle section)
-        const payload = JSON.parse(atob(data.token.split('.')[1]));
-        setUser({ id: payload.userId, name: '', email: '', role: payload.role });
-      })
-      .catch(() => {/* not logged in */})
-      .finally(() => setIsLoading(false));
+    const session = getSession();
+    if (session) {
+      const sessionToken = encodeSessionToken(session);
+      setToken(sessionToken);
+      setUser({
+        id: session.userId,
+        name: session.name,
+        email: session.email,
+        role: session.role,
+      });
+      api.defaults.headers.common['Authorization'] = `Bearer ${sessionToken}`;
+    }
+    setIsLoading(false);
   }, []);
 
   const login = useCallback(async (email: string, password: string) => {
@@ -41,12 +45,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setToken(data.token);
     setUser(data.user);
     api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+
+    setSession({
+      userId: data.user.id,
+      name: data.user.name,
+      email: data.user.email,
+      role: data.user.role,
+    });
   }, []);
 
   const logout = useCallback(async () => {
-    try { await api.post('/auth/logout'); } catch { /* ignore */ }
+    try {
+      await api.post('/auth/logout');
+    } catch {
+      /* ignore */
+    }
     setToken(null);
     setUser(null);
+    setSession(null);
     delete api.defaults.headers.common['Authorization'];
   }, []);
 

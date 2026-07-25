@@ -184,7 +184,7 @@ export default function AdminDashboard() {
 
   const fetchOverview = async () => {
     try {
-      const { data } = await api.get('/dashboard/admin');
+      const { data } = await api.get<{ kpis: KPIs; charts: ChartData }>('/dashboard/admin');
       setKpis(data.kpis);
       setCharts(data.charts);
     } catch (err: any) {
@@ -194,7 +194,7 @@ export default function AdminDashboard() {
 
   const fetchPlacements = async () => {
     try {
-      const { data } = await api.get('/admin/reports');
+      const { data } = await api.get<{ report: ApplicationReport[] }>('/admin/reports');
       setApplications(data.report);
     } catch (err: any) {
       flashMessage(err.response?.data?.error || 'Failed to load placement reports', true);
@@ -204,8 +204,8 @@ export default function AdminDashboard() {
   const fetchCompaniesAndDrives = async () => {
     try {
       const [compRes, driveRes] = await Promise.all([
-        api.get('/companies?limit=100'),
-        api.get('/drives?limit=100')
+        api.get<{ companies: CompanyRecord[] }>('/companies?limit=100'),
+        api.get<{ drives: DriveRecord[] }>('/drives?limit=100')
       ]);
       setCompanies(compRes.data.companies);
       setDrives(driveRes.data.drives);
@@ -217,7 +217,7 @@ export default function AdminDashboard() {
   const fetchUsers = async () => {
     if (user?.role !== 'admin') return;
     try {
-      const { data } = await api.get('/admin/users');
+      const { data } = await api.get<{ users: UserRecord[] }>('/admin/users');
       setUsersList(data.users);
     } catch (err: any) {
       flashMessage(err.response?.data?.error || 'Failed to load users list', true);
@@ -227,7 +227,7 @@ export default function AdminDashboard() {
   const fetchAuditLogs = async () => {
     if (user?.role !== 'admin') return;
     try {
-      const { data } = await api.get('/admin/audit?limit=100');
+      const { data } = await api.get<{ logs: AuditLogRecord[] }>('/admin/audit?limit=100');
       setAuditLogs(data.logs);
     } catch (err: any) {
       flashMessage(err.response?.data?.error || 'Failed to load audit logs', true);
@@ -331,7 +331,7 @@ export default function AdminDashboard() {
     try {
       let finalCompanyId = driveCompanyId;
       if (driveCompanyId === 'new_company') {
-        const { data } = await api.post('/companies', {
+        const { data } = await api.post<{ company: CompanyRecord }>('/companies', {
           name: compName,
           industry: compIndustry || undefined,
           packageMin: compMinPkg !== '' ? Number(compMinPkg) : undefined,
@@ -1081,7 +1081,7 @@ export default function AdminDashboard() {
       {/* FOOTER */}
       <footer className="border-t border-slate-900 bg-slate-950 px-6 py-4 flex items-center justify-between text-[10px] text-slate-600">
         <p>© 2026 Smart India Hackathon internal assessment. All rights reserved.</p>
-        <p className="font-mono">Security Layer: JWT + bcrypt + DB Denylist Active</p>
+        <p className="font-mono">Data persisted in browser cookies · Vercel deployment ready</p>
       </footer>
 
       {/* MODAL 1: EDIT APPLICATION DETAILS */}

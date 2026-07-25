@@ -164,7 +164,7 @@ export default function LoginPage() {
 
         {/* Security badge */}
         <p className="text-center text-[10px] text-slate-600 font-mono">
-          🔒 Secured with JWT · bcrypt · RBAC · Rate Limiting
+          🔒 Session stored in cookies · RBAC · Vercel-ready
         </p>
       </div>
     </div>

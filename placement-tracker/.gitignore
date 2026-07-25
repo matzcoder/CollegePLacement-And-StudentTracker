@@ -37,3 +37,7 @@ Thumbs.db
 
 # Prisma
 backend/src/prisma/migrations/
+
+# SQLite database files — not used in production (we use PostgreSQL via Neon)
+backend/src/prisma/*.db
+backend/src/prisma/*.db-journal

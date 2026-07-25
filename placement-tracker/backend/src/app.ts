@@ -32,7 +32,19 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: config.clientOrigin,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (e.g. mobile apps, curl, Vercel health checks)
+    if (!origin) return callback(null, true);
+    const allowed = config.clientOrigin
+      .split(',')
+      .map((o) => o.trim())
+      .filter(Boolean);
+    if (allowed.includes(origin) || allowed.includes('*')) {
+      callback(null, true);
+    } else {
+      callback(new Error(`CORS: origin ${origin} not allowed`));
+    }
+  },
   credentials: true,
 }));
 

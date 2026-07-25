@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "projects": [
+    {
+      "name": "placement-tracker-frontend",
+      "root": "frontend"
+    },
+    {
+      "name": "placement-tracker-backend",
+      "root": "backend"
+    }
+  ]
+}

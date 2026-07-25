@@ -61,7 +61,7 @@ export default function StudentDashboard() {
 
   async function fetchDashboard() {
     try {
-      const { data } = await api.get('/dashboard/student');
+      const { data } = await api.get<{ kpis: KPIs; applications: Application[] }>('/dashboard/student');
       setKpis(data.kpis);
       setApplications(data.applications);
     } catch {
@@ -85,7 +85,7 @@ export default function StudentDashboard() {
     setChatInput('');
     setChatBusy(true);
     try {
-      const { data } = await api.post('/assistant/query', { message: userMsg });
+      const { data } = await api.post<{ response: string }>('/assistant/query', { message: userMsg });
       setChatMessages((m) => [...m, { role: 'assistant', text: data.response }]);
     } catch {
       setChatMessages((m) => [...m, { role: 'assistant', text: 'Sorry, I encountered an error. Please try again.' }]);
