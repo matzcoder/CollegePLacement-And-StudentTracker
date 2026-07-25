@@ -620,3 +620,7 @@ See the [LICENSE](LICENSE) file for more information.
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:dbeafe,50:60a5fa,100:2563eb&height=110&section=footer&animation=fadeIn"/>
 </p>
 ```
+
+<p align="center'>
+Visit for live demo:https://college-p-lacement-and-student-trac-six.vercel.app/login
+    </p>
