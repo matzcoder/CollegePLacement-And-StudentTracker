@@ -5,23 +5,6 @@ Absolutely buddy — add the following content **after your last Mermaid `style 
 
 </div>
 
----
-
-## 📌 Assessment Information
-
-| Item | Details |
-|---|---|
-| 📚 **Assessment** | SIH 2026 — Internal Practical Assessment |
-| 🧩 **Problem Level** | Easy |
-| ⏱️ **Duration** | 2 Days |
-| 🏆 **Maximum Marks** | 70 |
-| 👨‍🎓 **Student Name** | MATTHEW P R |
-| 🆔 **Register Number** | 411623149030 |
-| 🏫 **Institution** | PDKVCET |
-| 🛡️ **Department** | CYBER |
-| 📅 **Year** | IV |
-
----
 
 ## 🚨 Problem Statement
 
