@@ -1,8 +1,3 @@
-Absolutely buddy — add the following content **after your last Mermaid `style M...` line**. It completes the diagram and gives your README proper SIH assessment documentation, dataset details, AI assistant behavior, calculations, testing, security notes, and deliverables.
-
-```md
-```
-
 </div>
 
 
