@@ -406,25 +406,6 @@ The current Vercel-ready implementation stores demo data inside browser cookies.
 Cookie-based storage is suitable for a **demo, prototype, or academic assessment**. A real college deployment should use a secure backend and database.
 
 ---
-
-## 🖼️ Screenshots
-
-| Login Portal | Student Dashboard |
-|---|---|
-| ![Login](screenshots/login.png) | ![Student Dashboard](screenshots/student-dashboard.png) |
-
-| Placement Officer Dashboard | Admin Panel |
-|---|---|
-| ![Officer Dashboard](screenshots/officer-dashboard.png) | ![Admin Dashboard](screenshots/admin-dashboard.png) |
-
-| AI Assistant | Placement Drive Management |
-|---|---|
-| ![AI Assistant](screenshots/assistant.png) | ![Drive Management](screenshots/drives.png) |
-
-> Add your own project screenshots inside the `screenshots/` folder before submission.
-
----
-
 ## 📁 Suggested Project Structure
 
 ```text
