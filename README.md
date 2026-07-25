@@ -620,5 +620,3 @@ See the [LICENSE](LICENSE) file for more information.
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:dbeafe,50:60a5fa,100:2563eb&height=110&section=footer&animation=fadeIn"/>
 </p>
 ```
-
-One important correction for your README: since your Vercel version uses browser cookies and client-side data, do **not** claim that passwords are securely hashed in that deployed version unless you actually implemented bcrypt/argon2 through the backend. The “Production Security Note” section above handles this honestly and professionally.
