@@ -1,0 +1,64 @@
+/**
+ * Keyword map for intent matching.
+ * Each intent has an array of keywords/phrases. Matching score =
+ * number of keywords found in cleaned input / total keywords in that intent.
+ */
+export const keywordMap: Record<string, string[]> = {
+  company_count: [
+    'how many companies',
+    'companies visited',
+    'total companies',
+    'number of companies',
+    'how many firms',
+    'companies came',
+    'companies visited campus',
+  ],
+  where_applied: [
+    'where did i apply',
+    'which companies did i apply',
+    'list my applications',
+    'show my applications',
+    'where have i applied',
+    'applied companies',
+    'my applications',
+  ],
+  shortlist_status: [
+    'shortlisted',
+    'was i shortlisted',
+    'am i shortlisted',
+    'shortlist status',
+    'did i get shortlisted',
+    'got shortlisted',
+  ],
+  offer_status: [
+    'offer',
+    'did i get an offer',
+    'do i have an offer',
+    'got selected',
+    'selected',
+    'did i get selected',
+    'placement result',
+  ],
+  package_query: [
+    'package',
+    'salary',
+    'ctc',
+    'how much salary',
+    'what is my package',
+    'my offer package',
+    'compensation',
+    'stipend',
+  ],
+  application_status: [
+    'application status',
+    'status of my application',
+    'where am i',
+    'pipeline',
+    'current stage',
+    'interview stage',
+    'applied status',
+    'show status',
+  ],
+};
+
+export const CONFIDENCE_THRESHOLD = 0.3; // lower threshold for short keyword lists

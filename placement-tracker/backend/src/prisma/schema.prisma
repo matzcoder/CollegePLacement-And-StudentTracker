@@ -1,0 +1,159 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Student {
+  id           String   @id @default(uuid())
+  rollNumber   String   @unique @map("roll_number")
+  fullName     String   @map("full_name")
+  department   String
+  cgpa         Float
+  batchYear    Int      @map("batch_year")
+  phone        String?
+  backlogCount Int      @default(0) @map("backlog_count")
+  resumeUrl    String?  @map("resume_url")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user         User?
+  applications Application[]
+
+  @@map("students")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  role         String   @default("student")
+  studentId    String?  @unique @map("student_id")
+  isActive     Boolean  @default(true) @map("is_active")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  student       Student?       @relation(fields: [studentId], references: [id])
+  assistantLogs AssistantLog[]
+  activityLogs  ActivityLog[]
+  notifications Notification[]
+  refreshTokens RefreshToken[]
+
+  @@map("users")
+}
+
+model Company {
+  id         String   @id @default(uuid())
+  name       String
+  industry   String?
+  packageMin Float?   @map("package_min")
+  packageMax Float?   @map("package_max")
+  website    String?
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  drives PlacementDrive[]
+
+  @@map("companies")
+}
+
+model PlacementDrive {
+  id                  String   @id @default(uuid())
+  companyId           String   @map("company_id")
+  driveDate           DateTime @map("drive_date")
+  eligibleDepartments String?  @map("eligible_departments")
+  minCgpa             Float?   @map("min_cgpa")
+  roleOffered         String?  @map("role_offered")
+  status              String   @default("upcoming")
+  createdAt           DateTime @default(now()) @map("created_at")
+  updatedAt           DateTime @updatedAt @map("updated_at")
+
+  company      Company       @relation(fields: [companyId], references: [id])
+  applications Application[]
+
+  @@map("placement_drives")
+}
+
+model Application {
+  id              String   @id @default(uuid())
+  studentId       String   @map("student_id")
+  driveId         String   @map("drive_id")
+  stage           String   @default("applied")
+  offerStatus     String   @default("pending") @map("offer_status")
+  package         Float?
+  appliedOn       DateTime @default(now()) @map("applied_on")
+  createdAt       DateTime @default(now()) @map("created_at")
+  updatedAt       DateTime @updatedAt @map("updated_at")
+
+  student           Student             @relation(fields: [studentId], references: [id])
+  drive             PlacementDrive      @relation(fields: [driveId], references: [id])
+
+  @@unique([studentId, driveId])
+  @@map("applications")
+}
+
+model TokenDenylist {
+  jti       String   @id
+  userId    String   @map("user_id")
+  expiresAt DateTime @map("expires_at")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("token_denylist")
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  tokenHash String   @unique @map("token_hash")
+  expiresAt DateTime @map("expires_at")
+  revoked   Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("refresh_tokens")
+}
+
+model AssistantLog {
+  id             String   @id @default(uuid())
+  userId         String   @map("user_id")
+  rawQuery       String   @map("raw_query")
+  detectedIntent String?  @map("detected_intent")
+  confidence     Float?
+  responseText   String   @map("response_text")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("assistant_logs")
+}
+
+model ActivityLog {
+  id         String   @id @default(uuid())
+  userId     String?  @map("user_id")
+  action     String
+  entityType String?  @map("entity_type")
+  entityId   String?  @map("entity_id")
+  ipAddress  String?  @map("ip_address")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id])
+
+  @@map("activity_logs")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String   @map("user_id")
+  title     String
+  message   String
+  isRead    Boolean  @default(false) @map("is_read")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("notifications")
+}
