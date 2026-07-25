@@ -1,312 +1,665 @@
-Here's your README restyled in the same visual language — capsule headers, typing SVG, badge rows, mermaid flows, and status tables — but with a **light / pastel theme** (soft slate‑blue gradients, sky accents, dark text).
+Absolutely buddy — add the following content **after your last Mermaid `style M...` line**. It completes the diagram and gives your README proper SIH assessment documentation, dataset details, AI assistant behavior, calculations, testing, security notes, and deliverables.
 
-Copy everything inside the block below into your `README.md`:
-
-````markdown
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:e0f2fe,50:ede9fe,100:f8fafc&height=200&section=header&text=Placement%20Tracker&fontSize=50&fontColor=1e3a8a&animation=fadeIn&fontAlignY=35&desc=College%20Placement%20Drive%20%7C%20Student%20Application%20Tracker&descSize=18&descAlignY=55&descAlign=50"/>
-</p>
-
-<div align="center">
-
-  [![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=800&size=22&duration=3000&pause=1000&color=2563EB&center=true&vCenter=true&width=650&lines=Full-Stack+Placement+Management;Zero-Database+Cookie+Architecture;Role-Based+Portals+%7C+Student+%7C+Officer+%7C+Admin;Rule-Based+AI+Assistant)](https://git.io/typing-svg)
-
-</div>
-
-<p align="center">
-  <a href="#-quick-start" target="_blank">
-    <img src="https://img.shields.io/badge/🚀_LIVE_DEMO-DBEAFE?style=for-the-badge&logo=vercel&logoColor=1E3A8A&labelColor=F8FAFC" />
-  </a>
-  <img src="https://img.shields.io/badge/React_18-E0F2FE?style=for-the-badge&logo=react&logoColor=0EA5E9&labelColor=F8FAFC" />
-  <img src="https://img.shields.io/badge/Vite-EDE9FE?style=for-the-badge&logo=vite&logoColor=7C3AED&labelColor=F8FAFC" />
-  <img src="https://img.shields.io/badge/TypeScript-DBEAFE?style=for-the-badge&logo=typescript&logoColor=3178C6&labelColor=F8FAFC" />
-  <img src="https://img.shields.io/badge/Tailwind-CFFAFE?style=for-the-badge&logo=tailwindcss&logoColor=0891B2&labelColor=F8FAFC" />
-  <img src="https://img.shields.io/badge/Cookie_Storage-FEF3C7?style=for-the-badge&logo=cookiecutter&logoColor=B45309&labelColor=F8FAFC" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Built_for-SIH_2026-E0E7FF?style=for-the-badge&labelColor=F8FAFC&color=E0E7FF" />
-  <img src="https://img.shields.io/badge/License-MIT-DCFCE7?style=for-the-badge&labelColor=F8FAFC" />
-  <img src="https://img.shields.io/badge/Database-NOT_REQUIRED-FCE7F3?style=for-the-badge&labelColor=F8FAFC" />
-</p>
-
----
-
-## ☀️ The Problem
-
-> Placement cells run on **manual Excel sheets**, **WhatsApp forwards**, and **scattered emails**.
->
-> Students have **zero real-time visibility** into their application pipeline.
-> Administrators have **no aggregate analytics** to drive decisions.
-
-**Placement Tracker** replaces all of it with one browser-native workspace.
-
----
-
-## 🧭 The Light Architecture
-
-<div align="center">
-
-```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#dbeafe', 'primaryTextColor':'#1e293b', 'primaryBorderColor':'#2563eb', 'lineColor':'#7c3aed', 'secondaryColor':'#ede9fe', 'tertiaryColor':'#f1f5f9', 'background':'#ffffff', 'fontSize':'15px'}}}%%
-graph TD
-    A[🎓 User Login] -->|RBAC Session Cookie| B{React SPA · Vite}
-    B --> C[Student Portal]
-    B --> D[Officer Portal]
-    B --> E[Admin Panel]
-
-    C --> F[🍪 Cookie Session Store]
-    D --> F
-    E --> F
-
-    F --> G[Drives & Companies]
-    F --> H[Applications & Stages]
-    F --> I[Audit Logs]
-    F --> J[Analytics & Reports]
-
-    G --> K[🤖 Rule-Based AI Assistant]
-    H --> K
-    K --> L[Scoped Answers · Own Data Only]
-
-    style A fill:#bfdbfe,stroke:#2563eb,stroke-width:2px,color:#1e293b
-    style B fill:#f1f5f9,stroke:#7c3aed,stroke-width:2px,color:#1e293b
-    style F fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#1e293b
-    style K fill:#ede9fe,stroke:#7c3aed,stroke-width:3px,color:#1e293b
-    style L fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#1e293b
-    style C fill:#e0f2fe,stroke:#0ea5e9,stroke-width:2px,color:#1e293b
-    style D fill:#e0f2fe,stroke:#0ea5e9,stroke-width:2px,color:#1e293b
-    style E fill:#e0f2fe,stroke:#0ea5e9,stroke-width:2px,color:#1e293b
+```md
 ```
 
 </div>
 
 ---
 
-## ⚡ Core Capabilities
+## 📌 Assessment Information
 
-| Capability | Description | Status |
-|---|---|---|
-| 🎓 **Student Portal** | Browse drives, apply, track application stages | `ACTIVE` |
-| 🧑‍💼 **Officer Portal** | Manage companies & drives, update stages, reports | `ACTIVE` |
-| 🛡️ **Admin Panel** | Full CRUD, user management, audit logs, analytics | `ACTIVE` |
-| 🤖 **AI Assistant** | Rule-based intent engine scoped to the logged-in student | `ACTIVE` |
-| 🍪 **Cookie Sessions** | All data + auth persist in browser cookies | `ACTIVE` |
-| 📊 **Analytics** | Recharts-powered aggregate placement insights | `ACTIVE` |
-| 🔐 **RBAC** | Role-gated routes and data visibility | `ACTIVE` |
-
----
-
-## 🎭 Role-Based Command Centers
-
-<div align="center">
-
-| Role | Access | Purpose |
-|:---:|:---|:---|
-| 🎓 **Student** | `/dashboard` | Drive discovery, applications, stage tracking, AI chat |
-| 🧑‍💼 **Officer** | `/officer` | Company & drive management, stage updates, reports |
-| 🛡️ **Admin** | `/admin` | Full CRUD, user management, audit trail, analytics |
-
-</div>
-
----
-
-## 🏗️ Zero-Database Architecture
-
-> **No PostgreSQL. No MongoDB. No backend server in production.**
->
-> Everything is serialized into **chunked browser cookies**. Zero config, zero cost, zero infra.
-
-```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#dbeafe', 'primaryTextColor':'#1e293b', 'primaryBorderColor':'#2563eb', 'lineColor':'#7c3aed', 'secondaryColor':'#ede9fe', 'tertiaryColor':'#f1f5f9', 'background':'#ffffff'}}}%%
-flowchart LR
-    A[User Action] --> B[React State]
-    B --> C[JSON Serialize]
-    C --> D[🍪 Chunked Cookies<br/>pt_data_*]
-    D --> E[Session Cookie<br/>pt_session]
-    E --> F[Rehydrate on Reload]
-    F --> B
-
-    style A fill:#bfdbfe,stroke:#2563eb,stroke-width:2px,color:#1e293b
-    style B fill:#f1f5f9,stroke:#7c3aed,stroke-width:2px,color:#1e293b
-    style C fill:#e0f2fe,stroke:#0ea5e9,stroke-width:2px,color:#1e293b
-    style D fill:#fef3c7,stroke:#d97706,stroke-width:3px,color:#1e293b
-    style E fill:#fce7f3,stroke:#db2777,stroke-width:2px,color:#1e293b
-    style F fill:#dcfce7,stroke:#16a34a,stroke-width:2px,color:#1e293b
-```
-
----
-
-## 🧱 Tech Stack
-
-| Layer | Technology |
+| Item | Details |
 |---|---|
-| **Frontend** | React 18 · Vite · TypeScript |
-| **Styling** | Tailwind CSS · shadcn/ui |
-| **Charts** | Recharts |
-| **Data** | Browser cookies (chunked JSON) + session cookie |
-| **AI** | Client-side rule-based intent engine |
-| **Auth** | Cookie session + RBAC |
-| **Backend** *(optional, local dev)* | Node.js · Express · Prisma `LEGACY` |
-| **Deploy** | Vercel (static SPA) |
+| 📚 **Assessment** | SIH 2026 — Internal Practical Assessment |
+| 🧩 **Problem Level** | Easy |
+| ⏱️ **Duration** | 2 Days |
+| 🏆 **Maximum Marks** | 70 |
+| 👨‍🎓 **Student Name** | MATTHEW P R |
+| 🆔 **Register Number** | 411623149030 |
+| 🏫 **Institution** | PDKVCET |
+| 🛡️ **Department** | CYBER |
+| 📅 **Year** | IV |
 
 ---
 
-## 🚀 Quick Start
+## 🚨 Problem Statement
 
-### 📋 Prerequisites
-- **Node.js 18+** and npm
+### College Placement Drive and Student Application Tracker
 
-### 🛠️ Local Development
+Placement cells often circulate company notices through WhatsApp messages, emails, notice boards, or informal groups. Student applications may be collected using paper forms, spreadsheets, or separate documents.
+
+As a result, critical placement information becomes scattered:
+
+- Which student applied to which company
+- Which students were shortlisted
+- Which applications are under review
+- Who attended interviews or assessments
+- Which students received final offers
+- How many students were placed through each drive
+- Which drives are still active or pending
+
+This makes it difficult for placement officers to monitor drive performance and for students to track their own application status before deadlines are missed.
+
+---
+
+## 🎯 Project Objective
+
+> Build a centralized placement tracker that records placement drives, student applications, application stages, and final outcomes while providing personalized AI-assisted answers for students.
+
+The system enables:
+
+- 🎓 Students to view placement drives and monitor their own application journey.
+- 🧑‍💼 Placement officers to manage companies, drives, and application stages.
+- 🛡️ Administrators to maintain users, records, reports, and audit logs.
+- 🤖 Students to ask simple placement-related questions in natural language.
+
+---
+
+## 💡 Solution Overview
+
+The **College Placement Drive & Student Application Tracker** is a role-based web application that brings placement activities into one workspace.
+
+Instead of manually searching through multiple Excel files or WhatsApp messages, placement officers can manage all drives and applications from a dashboard. Students can log in, check eligible drives, apply, and track their progress from application to offer.
+
+The system also includes a lightweight AI assistant that answers placement questions using only the currently logged-in student's records.
+
+---
+
+## ✨ Key Features
+
+| Feature | Description |
+|---|---|
+| 📢 **Placement Drive Notices** | Publish and manage company placement drives in one location |
+| 🎓 **Student Applications** | Students can apply for eligible company drives |
+| 🔎 **Application Tracking** | Track progress from Applied to Shortlisted, Interviewed, Offered, or Rejected |
+| 🧑‍💼 **Officer Dashboard** | Monitor drive participation, applications, and outcomes |
+| 🛡️ **Admin Dashboard** | Manage users, placement data, reports, and audit logs |
+| 🤖 **AI Placement Assistant** | Answers selected placement questions based on the logged-in student’s data |
+| 📊 **Placement Analytics** | Visual reports for applications, drive performance, and placement outcomes |
+| 🔐 **Role-Based Access Control** | Separate access for Students, Officers, and Admins |
+| 🍪 **Cookie Data Persistence** | Demo data and sessions persist through browser cookies |
+| ⚠️ **Empty & Error States** | Handles missing information, unsupported questions, and empty application records |
+
+---
+
+## 👥 User Roles
+
+<div align="center">
+
+| Role | Access | Main Responsibilities |
+|:---:|:---|:---|
+| 🎓 **Student** | Student Portal | Browse drives, apply, track application progress, use AI assistant |
+| 🧑‍💼 **Placement Officer** | Officer Portal | Create drives, manage applications, update student stages, view reports |
+| 🛡️ **Admin** | Admin Panel | Full CRUD operations, user management, analytics, and audit monitoring |
+
+</div>
+
+---
+
+## 🗂️ Placement Application Dataset
+
+The project uses a realistic placement application dataset containing approximately **100 application records**.
+
+Each record represents one student application for one company placement drive.
+
+### 📄 Dataset Fields
+
+| Field | Description | Example | Possible Values |
+|---|---|---|---|
+| `application_id` | Unique identifier for an application record | `APP-001` | Unique alphanumeric ID |
+| `student_id` | Unique student identifier | `STU-1042` | Unique student ID |
+| `student_name` | Full name of the student | `Riya Sharma` | Text value |
+| `company` | Company conducting the placement drive | `TCS` | Company name |
+| `drive_date` | Date of the placement drive | `2026-02-18` | Valid date |
+| `stage` | Current stage of the application | `Shortlisted` | Applied, Under Review, Shortlisted, Assessment, Interview, Rejected, Offered |
+| `offer_status` | Final placement outcome | `Pending` | Pending, Offered, Not Offered |
+| `package` | Offered annual salary package | `6.5 LPA` | Numeric value, LPA, `N/A`, or empty |
+| `outcome` | Final application result used for reporting/prediction | `Placed` | Placed, Not Placed, Pending |
+
+---
+
+## ⚠️ Deliberate Edge Cases in Dataset
+
+The sample data includes intentionally awkward records to test search, validation, display handling, and assistant behavior.
+
+| Edge Case | Purpose |
+|---|---|
+| 🕳️ **Missing Package Value** | Ensures the application handles missing salary/package data gracefully |
+| 👤 **Similar Student Names** | Tests that student records are identified using IDs and login sessions, not only names |
+| ❓ **Unrelated Record** | Tests filtering and prevents irrelevant data from appearing in student results |
+| ⏳ **Pending Applications** | Ensures incomplete application outcomes are displayed correctly |
+| 🚫 **No Applications** | Tests the empty state for students who have not applied to any drive |
+
+### Example Similar Names
+
+```text
+Riya Sharma
+Riya S. Sharma
+Riya Sharmila
+```
+
+> The application uses the logged-in user identity and student ID to prevent data from being mixed between similar names.
+
+---
+
+## 🔄 Application Stage Flow
+
+<div align="center">
+
+```mermaid
+%%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#dbeafe', 'primaryTextColor': '#1e3a8a', 'primaryBorderColor': '#2563eb', 'lineColor': '#60a5fa'}}}%%
+stateDiagram-v2
+    [*] --> Applied
+    Applied --> UnderReview
+    UnderReview --> Shortlisted
+    UnderReview --> Rejected
+    Shortlisted --> Assessment
+    Assessment --> Interview
+    Assessment --> Rejected
+    Interview --> Offered
+    Interview --> Rejected
+    Offered --> [*]
+    Rejected --> [*]
+```
+
+</div>
+
+### Application Stages Explained
+
+| Stage | Meaning |
+|---|---|
+| 📝 **Applied** | Student has submitted an application for the drive |
+| ⏳ **Under Review** | Placement officer or company is reviewing the application |
+| ✅ **Shortlisted** | Student has been selected for the next round |
+| 🧪 **Assessment** | Student must complete an online test, coding round, or aptitude test |
+| 💬 **Interview** | Student has progressed to an interview round |
+| 🎉 **Offered** | Student has received a placement offer |
+| ❌ **Rejected** | Student is no longer progressing in the drive |
+
+---
+
+## 🤖 AI Placement Assistant
+
+The platform includes a simple **rule-based intent-matching assistant**.
+
+It is designed to help students who may not want to search through tables, filters, or menus.
+
+### 🧠 Input Normalization
+
+Before matching a question, the assistant processes the input by:
+
+```text
+1. Trimming extra spaces
+2. Converting text to lowercase
+3. Removing punctuation
+4. Matching important placement-related keywords
+5. Checking the question against supported intents
+```
+
+### Supported Student Questions
+
+| Intent | Example Question | Assistant Response |
+|---|---|---|
+| 📋 **My Applications** | “Show my applications” | Lists applications submitted by the logged-in student |
+| ✅ **Shortlisted Drives** | “Am I shortlisted anywhere?” | Shows drives where the student is shortlisted |
+| 🎉 **Offers Received** | “Did I get any offers?” | Displays offer status and package details |
+| ⏳ **Pending Applications** | “Which applications are pending?” | Shows drives still under review or in progress |
+| 📅 **Upcoming Drives** | “What is my next drive?” | Shows relevant upcoming drive details |
+| 📊 **Application Count** | “How many companies did I apply to?” | Returns the total number of applications |
+
+---
+
+## 🔒 Privacy-Scoped Assistant Responses
+
+The assistant only reads information related to the currently authenticated student.
+
+```text
+Logged-in Student
+      ↓
+Student ID from Session
+      ↓
+Filter Application Records
+      ↓
+Return Only That Student's Placement Information
+```
+
+### Example
+
+If **Riya Sharma** is logged in:
+
+```text
+Question:
+"Show my shortlisted companies"
+
+Assistant:
+"You are shortlisted for Infosys and Wipro."
+```
+
+The assistant will not return information belonging to another student.
+
+---
+
+## 🚫 Unsupported Question Handling
+
+If the assistant cannot confidently identify an intent, it does not guess.
+
+Instead, it returns a clear fallback response such as:
+
+```text
+Sorry, I could not understand that question.
+
+You can ask things like:
+• Show my applications
+• Am I shortlisted anywhere?
+• Did I receive any offers?
+• Which applications are pending?
+• How many companies did I apply to?
+```
+
+> This prevents incorrect answers about placement status, salary packages, or student eligibility.
+
+---
+
+## 📊 Derived Figures & Calculations
+
+The dashboard calculates useful placement metrics from the stored application dataset.
+
+### Total Applications
+
+```text
+Total Applications = Count of all application records
+```
+
+### Total Offers
+
+```text
+Total Offers = Count of records where offer_status = "Offered"
+```
+
+### Placed Students
+
+```text
+Placed Students = Count of unique students with outcome = "Placed"
+```
+
+### Placement Rate
+
+```text
+Placement Rate (%) =
+(Number of Placed Students ÷ Total Eligible Students) × 100
+```
+
+### Shortlisted Applications
+
+```text
+Shortlisted Applications =
+Count of records where stage = "Shortlisted"
+```
+
+### Drive Participation
+
+```text
+Drive Participation =
+Number of applications submitted for a particular company drive
+```
+
+---
+
+## 🧮 Example Calculation
+
+Assume the system contains:
+
+```text
+Total Students: 100
+Students Placed: 58
+```
+
+The placement rate is calculated as:
+
+```text
+Placement Rate = (58 ÷ 100) × 100
+Placement Rate = 58%
+```
+
+If a company drive has:
+
+```text
+Applications Received: 24
+Students Shortlisted: 10
+Offers Released: 4
+```
+
+The dashboard can display:
+
+```text
+Shortlisting Rate = (10 ÷ 24) × 100 = 41.67%
+Offer Conversion Rate = (4 ÷ 24) × 100 = 16.67%
+```
+
+---
+
+## 🧪 Testing Checklist
+
+The application was tested across the major placement workflow.
+
+| Test Case | Expected Result |
+|---|---|
+| Student logs in successfully | Student dashboard loads with personal records |
+| Student views available drives | Relevant placement drives are displayed |
+| Student applies for a drive | New application is added to their profile |
+| Officer creates a drive | Drive becomes available in the placement workspace |
+| Officer updates application stage | Student dashboard reflects the updated stage |
+| Admin manages users | User records can be viewed and modified |
+| Student asks supported AI question | Assistant returns personal placement information |
+| Two students ask same question | Each student receives only their own results |
+| Student asks unsupported question | Assistant shows a safe fallback response |
+| Missing package value exists | UI displays `N/A` or appropriate fallback state |
+| Student has no applications | Empty state message is shown |
+| Browser page reloads | Cookie-based data remains available |
+
+---
+
+## ✅ Manual Verification Example
+
+One calculated figure was manually checked against the stored dataset.
+
+```text
+Company: TCS
+Total Applications in Dataset: 12
+Shortlisted Students: 5
+Offers Given: 2
+```
+
+Expected dashboard values:
+
+```text
+Applications: 12
+Shortlisted: 5
+Offers: 2
+```
+
+The dashboard values were compared manually with the source data to confirm correctness.
+
+---
+
+## 🔐 Authentication & Security
+
+### Current Demo Architecture
+
+The deployed frontend version uses browser cookies for session persistence and demo data storage.
+
+| Security Feature | Purpose |
+|---|---|
+| 🍪 **Session Cookie** | Stores the active user session |
+| 👥 **RBAC** | Controls access based on Student, Officer, or Admin role |
+| 🔎 **Student Data Filtering** | Prevents assistant responses from exposing other students’ records |
+| ⚠️ **Generic Login Errors** | Avoids exposing whether a specific account exists |
+| ✅ **Input Validation** | Validates required form fields and placement data |
+| 🧾 **Audit Logs** | Tracks important admin actions within the application |
+
+### Production Security Note
+
+> For a real production deployment, authentication should be handled on a secure backend using salted password hashes such as **bcrypt** or **argon2**, HTTP-only cookies, server-side validation, and a persistent database.
+
+The included optional legacy backend can be used as a foundation for backend-based authentication and database storage.
+
+---
+
+## 🍪 Browser Cookie Storage
+
+The current Vercel-ready implementation stores demo data inside browser cookies.
+
+| Cookie Key | Stored Information |
+|---|---|
+| `pt_session` | Active logged-in user session |
+| `pt_data_*` | Chunked JSON data for users, companies, drives, applications, and logs |
+
+### Benefits
+
+- ✅ No production database required
+- ✅ No backend server required for demo deployment
+- ✅ Works directly on Vercel
+- ✅ Data persists after browser refresh
+- ✅ Simple setup for assessment demonstration
+
+### Limitation
+
+Cookie-based storage is suitable for a **demo, prototype, or academic assessment**. A real college deployment should use a secure backend and database.
+
+---
+
+## 🖼️ Screenshots
+
+| Login Portal | Student Dashboard |
+|---|---|
+| ![Login](screenshots/login.png) | ![Student Dashboard](screenshots/student-dashboard.png) |
+
+| Placement Officer Dashboard | Admin Panel |
+|---|---|
+| ![Officer Dashboard](screenshots/officer-dashboard.png) | ![Admin Dashboard](screenshots/admin-dashboard.png) |
+
+| AI Assistant | Placement Drive Management |
+|---|---|
+| ![AI Assistant](screenshots/assistant.png) | ![Drive Management](screenshots/drives.png) |
+
+> Add your own project screenshots inside the `screenshots/` folder before submission.
+
+---
+
+## 📁 Suggested Project Structure
+
+```text
+placement-tracker/
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── hooks/
+│   │   ├── lib/
+│   │   ├── data/
+│   │   └── types/
+│   ├── public/
+│   ├── vercel.json
+│   └── package.json
+│
+├── backend/                  # Optional legacy backend
+│   ├── prisma/
+│   ├── src/
+│   ├── .env.example
+│   └── package.json
+│
+├── screenshots/
+│   ├── login.png
+│   ├── student-dashboard.png
+│   ├── officer-dashboard.png
+│   ├── admin-dashboard.png
+│   └── assistant.png
+│
+├── presentation.pdf
+├── README.md
+└── LICENSE
+```
+
+---
+
+## 📦 Deliverables
+
+The repository contains or should contain the following SIH assessment deliverables:
+
+| Deliverable | Description |
+|---|---|
+| 💻 **Source Code** | Complete frontend and optional backend source code |
+| 📄 **README.md** | Setup guide, dataset explanation, calculations, and features |
+| 📊 **presentation.pdf** | 6–8 slide project presentation |
+| 🖼️ **Screenshots** | Screenshots from the working application |
+| 🎥 **Demo Video** | Short working demonstration of the system |
+| 📁 **Dataset** | Sample placement application records |
+| 🌐 **GitHub Repository** | Public repository containing all project files |
+
+---
+
+## 🎞️ Presentation Content
+
+The project presentation should include the following points:
+
+1. **The Problem**  
+   Manual placement tracking causes missed deadlines and scattered records.
+
+2. **Who Is Affected**  
+   Students, placement officers, administrators, and companies.
+
+3. **The Solution**  
+   A centralized platform for managing drives, applications, and placement outcomes.
+
+4. **Working Screenshots**  
+   Login, dashboards, drive management, applications, and AI assistant.
+
+5. **Derived Metrics**  
+   Explain placement rate, offer count, shortlisting rate, and drive participation.
+
+6. **What Works**  
+   Role-based portals, drive management, tracking, reporting, and AI queries.
+
+7. **What Is Unfinished**  
+   Production database integration, real notifications, and advanced AI capabilities.
+
+8. **Future Improvement**  
+   Resume parsing, WhatsApp alerts, cloud synchronization, and LLM-based recommendations.
+
+---
+
+## 🔮 Future Enhancements
+
+| Enhancement | Description |
+|---|---|
+| 📄 **Resume Parsing** | Automatically extract CGPA, skills, projects, and certifications |
+| 🧠 **AI Drive Recommendations** | Suggest suitable drives based on skills, branch, and CGPA |
+| 📧 **Email Notifications** | Notify students about new drives and application updates |
+| 💬 **WhatsApp Integration** | Send deadlines, interview updates, and offer notifications |
+| 📱 **Mobile Application** | Develop a React Native mobile app |
+| ☁️ **Cloud Database** | Integrate Supabase, Firebase, PostgreSQL, or PlanetScale |
+| 🔐 **Production Authentication** | Add bcrypt/argon2 password hashing and secure server sessions |
+| 📈 **Advanced Analytics** | Department-wise placement rate, company trends, and salary insights |
+| 📎 **Document Uploads** | Upload resumes, offer letters, and placement documents |
+
+---
+
+## 🛠️ Local Development
+
+### Prerequisites
+
+```text
+Node.js 18+
+npm
+```
+
+### Run the Frontend
 
 ```bash
-# Clone the repository
-git clone https://github.com/<your-username>/placement-tracker.git
-cd placement-tracker/frontend
+# Navigate to frontend directory
+cd frontend
 
 # Install dependencies
 npm install
 
-# Start development server
+# Start the Vite development server
 npm run dev
 ```
 
-Then open [http://localhost:5173](http://localhost:5173) 🎉
-All data lives in your **browser cookies** — no setup required.
+Open:
 
-### ▲ Deploy to Vercel
-
-```bash
-cd frontend
-npx vercel
+```text
+http://localhost:5173
 ```
 
-Or via dashboard:
+---
 
-| Step | Action |
-|:---:|---|
-| 1️⃣ | Push this repo to GitHub |
-| 2️⃣ | Import the project in [Vercel](https://vercel.com) |
-| 3️⃣ | Set **Root Directory** → `placement-tracker/frontend` |
-| 4️⃣ | Deploy — the included `vercel.json` handles the rest |
+## ▲ Deploy on Vercel
+
+1. Push the project to GitHub.
+2. Open [Vercel](https://vercel.com).
+3. Import the GitHub repository.
+4. Set the root directory:
+
+```text
+placement-tracker/frontend
+```
+
+5. Click **Deploy**.
+
+The application can run as a static React SPA without requiring a production backend.
 
 ---
 
 ## 🔑 Demo Credentials
 
-<div align="center">
-
 | Role | Email | Password |
-|:---:|:---|:---|
-| 🛡️ **Admin** | `admin@college.edu` | `Admin@1234` |
-| 🧑‍💼 **Officer** | `officer@college.edu` | `Officer@1234` |
-| 🎓 **Student** | `riya.sharma@college.edu` | `Student@1234` |
-
-</div>
-
-> 💡 **No API keys, no `.env`, no database** — log in and the seeded demo data loads instantly.
+|---|---|---|
+| 🛡️ Admin | `admin@college.edu` | `Admin@1234` |
+| 🧑‍💼 Placement Officer | `officer@college.edu` | `Officer@1234` |
+| 🎓 Student | `riya.sharma@college.edu` | `Student@1234` |
 
 ---
 
-## 🎬 Demo Flow
+## 🧹 Reset Demo Data
 
-Perfect for presentations & portfolio showcases:
+To reset the placement data and login session:
 
-| Flow | Description |
-|---|---|
-| 🎓 **Student Journey** | Login → Dashboard → Browse drives → Apply → Track stages |
-| 🧑‍💼 **Officer Journey** | Login → Create drive → Move applicants through stages → Export report |
-| 🛡️ **Admin Journey** | Login → Manage users → Inspect audit log → Review analytics |
-| 🤖 **AI Assistant** | "What's my application status?" · "Which drives am I eligible for?" |
-
----
-
-## 🍪 Data Storage
-
-All placement data — **students, companies, drives, applications, audit logs** — is serialized into **chunked cookies** (`pt_data_*`). The active session is stored in `pt_session`.
-
-| Cookie | Contents |
-|---|---|
-| `pt_data_*` | Chunked JSON app state |
-| `pt_session` | Logged-in user + role claims |
-
-> 🔄 **Reset demo data:** clear site cookies for the app origin, or use
-> **DevTools → Application → Cookies → Clear**
-
----
-
-## 🗄️ Legacy Backend *(Optional)*
-
-The `backend/` folder contains the original **Express + Prisma** API.
-It is **not required** for Vercel deployment.
-
-```bash
-cd backend
-cp .env.example .env
-npm install
-npx prisma db push
-npx prisma db seed
-npm run dev
+```text
+Browser DevTools
+      ↓
+Application
+      ↓
+Cookies
+      ↓
+Clear Cookies for This Website
+      ↓
+Refresh the Application
 ```
 
----
-
-## 📸 Screenshots
-
-<div align="center">
-
-| Login | Student Dashboard | Admin Panel | AI Assistant |
-|:---:|:---:|:---:|:---:|
-| ![login](screenshots/login.png) | ![student](screenshots/student-dashboard.png) | ![admin](screenshots/admin-dashboard.png) | ![assistant](screenshots/assistant.png) |
-
-</div>
-
----
-
-## 🔭 Future Scope
-
-| Roadmap Item | Description | Status |
-|---|---|---|
-| 📄 **Resume Parsing** | Auto-extract CGPA & skills from uploaded resumes | `PLANNED` |
-| 📧 **Notifications** | Email + WhatsApp stage alerts | `PLANNED` |
-| 📱 **Mobile App** | React Native companion app | `PLANNED` |
-| ☁️ **Cloud Sync** | Optional Supabase / PlanetScale persistence | `PLANNED` |
-
----
-
-## 👥 Contributors
-
-<p align="center">
-  Built with ☕ for <b>SIH 2026 — Internal Practical Assessment</b>
-</p>
+This restores the application to its default demo state.
 
 ---
 
 ## 📜 License
 
-This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License**.
+
+See the [LICENSE](LICENSE) file for more information.
+
+---
+
+## 👨‍💻 Author
+
+<div align="center">
+
+### MATTHEW P R
+
+**Register Number:** 411623149030  
+**Institution:** PDKVCET  
+**Department:** CYBER  
+**Year:** IV  
+**Assessment:** SIH 2026 — Internal Practical Assessment  
+
+</div>
 
 ---
 
 <p align="center">
-  <a href="#-quick-start">
-    <img src="https://img.shields.io/badge/🚀_Get_Started-DBEAFE?style=for-the-badge&logo=vercel&logoColor=1E3A8A&labelColor=F8FAFC" />
-  </a>
+  <img src="https://img.shields.io/badge/🎓_Built_For-SIH_2026-2563EB?style=for-the-badge&labelColor=dbeafe" />
+  <img src="https://img.shields.io/badge/⚛️_Powered_By-React_%2B_Vite-646CFF?style=for-the-badge&labelColor=ede9fe" />
+  <img src="https://img.shields.io/badge/🛡️_Department-CYBER-16A34A?style=for-the-badge&labelColor=dcfce7" />
 </p>
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:f8fafc,50:ede9fe,100:e0f2fe&height=100&section=footer&animation=fadeIn"/>
+  <b>Made with dedication for SIH 2026 Internal Practical Assessment 🚀</b>
 </p>
-````
 
-**Light-theme palette used** (swap these hexes if you want a different accent):
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:dbeafe,50:60a5fa,100:2563eb&height=110&section=footer&animation=fadeIn"/>
+</p>
+```
 
-| Token | Hex | Use |
-|---|---|---|
-| Header gradient | `#e0f2fe → #ede9fe → #f8fafc` | Capsule banners |
-| Primary accent | `#2563eb` | Typing SVG, borders |
-| Secondary accent | `#7c3aed` | Mermaid link lines |
-| Highlight (cookies) | `#fef3c7 / #d97706` | Storage nodes |
-| Success | `#dcfce7 / #16a34a` | Output nodes |
-| Text | `#1e293b` | All diagram labels |
-
-Two things to update before publishing: the **clone URL** (`<your-username>`) and the **live demo link** if you deploy it — then swap the `#-quick-start` anchors for the real Vercel URL.
+One important correction for your README: since your Vercel version uses browser cookies and client-side data, do **not** claim that passwords are securely hashed in that deployed version unless you actually implemented bcrypt/argon2 through the backend. The “Production Security Note” section above handles this honestly and professionally.
