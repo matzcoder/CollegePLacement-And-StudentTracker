@@ -1,4 +1,84 @@
 </div>
+Add this section **below the Typing SVG section** and **above the technology badges** at the top of your README:
+
+```md
+<p align="center">
+  <a href="https://college-p-lacement-and-student-trac.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_LIVE_DEMO-2563EB?style=for-the-badge&logo=vercel&logoColor=white&labelColor=1e3a8a" />
+  </a>
+  <a href="https://college-p-lacement-and-student-trac.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Launch_Placement_Tracker-16A34A?style=for-the-badge&logo=vercel&logoColor=white&labelColor=14532d" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://college-p-lacement-and-student-trac.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🌐_college--p--lacement--and--student--trac.vercel.app-2563EB?style=for-the-badge&labelColor=dbeafe" />
+  </a>
+</p>
+```
+
+Your top README section will look like this:
+
+```md
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2563eb,50:60a5fa,100:dbeafe&height=200&section=header&text=Placement%20Drive%20Tracker&fontSize=48&fontColor=ffffff&animation=fadeIn&fontAlignY=35&desc=Smart%20Placement%20Management%20%7C%20AI-Assisted%20Student%20Tracking&descSize=18&descAlignY=55&descAlign=50"/>
+</p>
+
+<div align="center">
+
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=800&size=22&duration=3000&pause=1000&color=2563EB&center=true&vCenter=true&width=700&lines=College+Placement+Drive+Management;Student+Application+Tracking;Role-Based+Placement+Workspaces;AI-Assisted+Student+Queries)](https://git.io/typing-svg)
+
+</div>
+
+<p align="center">
+  <a href="https://college-p-lacement-and-student-trac.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_LIVE_DEMO-2563EB?style=for-the-badge&logo=vercel&logoColor=white&labelColor=1e3a8a" />
+  </a>
+  <a href="https://college-p-lacement-and-student-trac.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/Launch_Placement_Tracker-16A34A?style=for-the-badge&logo=vercel&logoColor=white&labelColor=14532d" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://college-p-lacement-and-student-trac.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🌐_college--p--lacement--and--student--trac.vercel.app-2563EB?style=for-the-badge&labelColor=dbeafe" />
+  </a>
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white&labelColor=1e3a8a" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white&labelColor=1e3a8a" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white&labelColor=1e3a8a" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white&labelColor=1e3a8a" />
+  <img src="https://img.shields.io/badge/shadcn%2Fui-000000?style=for-the-badge&logo=shadcnui&logoColor=white&labelColor=1e3a8a" />
+  <img src="https://img.shields.io/badge/Cookie_Storage-F59E0B?style=for-the-badge&logo=cookiecutter&logoColor=white&labelColor=1e3a8a" />
+</p>
+```
+
+Also add a direct live-demo section after the introduction:
+
+```md
+## 🚀 Live Demo
+
+<div align="center">
+
+### [🌐 Open the College Placement Tracker](https://college-p-lacement-and-student-trac.vercel.app)
+
+**Live URL:** [https://college-p-lacement-and-student-trac.vercel.app](https://college-p-lacement-and-student-trac.vercel.app)
+
+</div>
+```
+
+You can also update the footer with a clickable launch button:
+
+```md
+<p align="center">
+  <a href="https://college-p-lacement-and-student-trac.vercel.app" target="_blank">
+    <img src="https://img.shields.io/badge/🚀_Launch_Live_Demo-2563EB?style=for-the-badge&logo=vercel&logoColor=white&labelColor=1e3a8a" />
+  </a>
+</p>
+```
 
 
 ## 🚨 Problem Statement
