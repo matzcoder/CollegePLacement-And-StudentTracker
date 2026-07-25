@@ -1,152 +1,142 @@
 # Vercel Deployment Guide
 
 This project deploys as **two separate Vercel projects** from the same repository:
-- `frontend/` — React + Vite SPA
-- `backend/` — Express API as Vercel Serverless Functions
+- `placement-tracker/frontend/` — React + Vite SPA (fully self-contained, no backend needed)
+- `placement-tracker/backend/` — Express API as Vercel Serverless Functions (optional, for real PostgreSQL)
 
 ---
 
-## Prerequisites
+## Quick Deploy — Frontend Only (Recommended)
 
-- [Vercel account](https://vercel.com)
-- [Neon account](https://neon.tech) (free PostgreSQL — recommended) or any PostgreSQL provider
-- Vercel CLI (optional): `npm i -g vercel`
+The frontend runs completely standalone using browser cookie storage. No database or backend required.
+
+1. Push this repo to GitHub
+2. Go to [vercel.com/new](https://vercel.com/new) → Import Git Repository
+3. Set **Root Directory** to `placement-tracker/frontend`
+4. Click **Deploy** — no environment variables needed
+
+**That's it.** The app will be live at your Vercel URL.
 
 ---
 
-## Step 1 — Set Up the Database (Neon)
+## Full Stack Deploy — Frontend + Backend
 
-1. Go to [neon.tech](https://neon.tech) and create a free project.
-2. Copy the **connection string** from the Neon dashboard. It looks like:
+### Step 1 — Set up a PostgreSQL database (Neon)
+
+1. Go to [neon.tech](https://neon.tech) and create a free project
+2. Copy the connection string:
    ```
-   postgresql://user:pass@ep-xxx-yyy.region.aws.neon.tech/neondb?sslmode=require
+   postgresql://user:pass@ep-xxx.region.aws.neon.tech/neondb?sslmode=require
    ```
-3. Keep this handy — you'll paste it as `DATABASE_URL` in the backend Vercel project.
 
----
+### Step 2 — Deploy the Backend
 
-## Step 2 — Deploy the Backend
-
-### Option A: Vercel Dashboard (recommended)
-
-1. Go to [vercel.com/new](https://vercel.com/new) → **Import Git Repository**
-2. Select your repo, then set **Root Directory** to `placement-tracker/backend`
-3. Vercel will auto-detect it as a Node.js project
-4. Under **Environment Variables**, add:
+1. Go to [vercel.com/new](https://vercel.com/new) → Import Git Repository
+2. Set **Root Directory** to `placement-tracker/backend`
+3. Add these **Environment Variables**:
 
 | Variable | Value |
 |---|---|
 | `DATABASE_URL` | Your Neon PostgreSQL connection string |
-| `JWT_SECRET` | A long random string (min 32 chars) |
+| `JWT_SECRET` | A random string, min 32 chars |
 | `JWT_ACCESS_EXPIRY` | `30m` |
 | `JWT_REFRESH_EXPIRY` | `7d` |
 | `BCRYPT_ROUNDS` | `12` |
-| `CLIENT_ORIGIN` | Your frontend Vercel URL (e.g. `https://placement-tracker.vercel.app`) |
+| `CLIENT_ORIGIN` | Your frontend Vercel URL (set after frontend is deployed) |
 | `NODE_ENV` | `production` |
 
-5. Click **Deploy**
+4. Click **Deploy**
+5. Note your backend URL (e.g. `https://placement-tracker-api.vercel.app`)
 
-### Option B: Vercel CLI
+### Step 3 — Run the database migration
+
+From your local machine with `DATABASE_URL` pointing to Neon in your `.env`:
 
 ```bash
 cd placement-tracker/backend
-vercel --prod
+npm run prisma:migrate:deploy   # creates all tables
+npm run prisma:seed             # loads demo data
 ```
 
-Follow the prompts and set environment variables when asked, or add them in the Vercel dashboard after.
+### Step 4 — Deploy the Frontend (with backend)
 
-### After deploying the backend
-
-Run the database migration to create all tables:
-
-```bash
-# From backend/ directory, with DATABASE_URL set in your local .env pointing at Neon:
-npm run prisma:migrate:deploy
-```
-
-Optionally seed the database with sample data:
-
-```bash
-npm run prisma:seed
-```
-
-Note your backend URL — it will look like `https://placement-tracker-backend.vercel.app`
-
----
-
-## Step 3 — Deploy the Frontend
-
-1. Go to [vercel.com/new](https://vercel.com/new) → **Import Git Repository**
-2. Select your repo, set **Root Directory** to `placement-tracker/frontend`
-3. Vercel auto-detects Vite — build command is `tsc && vite build`, output dir is `dist`
-4. Under **Environment Variables**, add:
+1. Go to [vercel.com/new](https://vercel.com/new) → Import Git Repository
+2. Set **Root Directory** to `placement-tracker/frontend`
+3. Add **Environment Variable**:
 
 | Variable | Value |
 |---|---|
-| `VITE_API_URL` | Your backend Vercel URL (e.g. `https://placement-tracker-api.vercel.app/api`) |
+| `VITE_API_URL` | `https://your-backend.vercel.app/api` |
 
-5. Click **Deploy**
+4. Click **Deploy**
 
-> **Note:** The frontend currently runs fully standalone using browser-based local storage (no backend required). The `VITE_API_URL` env var is for when you want to switch from the local mock API to the real backend.
+> **Note:** The frontend currently routes all API calls through its local mock (cookie store) by default.
+> To switch to the real backend, update `frontend/src/services/api.ts` to use `VITE_API_URL` instead
+> of `handleLocalRequest`. The local mock is fully functional for demos without any backend.
 
----
+### Step 5 — Update CORS
 
-## Step 4 — Update CORS
-
-Once both are deployed, go back to your **backend** project in the Vercel dashboard:
-
-- Update `CLIENT_ORIGIN` to your actual frontend URL (e.g. `https://placement-tracker-frontend.vercel.app`)
-- Redeploy the backend (Vercel does this automatically when you save env vars)
+In your **backend** Vercel project → Settings → Environment Variables:
+- Set `CLIENT_ORIGIN` to your frontend URL (e.g. `https://placement-tracker.vercel.app`)
+- Redeploy
 
 ---
 
 ## Local Development
 
 ```bash
-# Terminal 1 — Backend
+# Terminal 1 — Frontend (standalone, no backend needed)
+cd placement-tracker/frontend
+npm install
+npm run dev
+# → http://localhost:5173
+
+# Terminal 2 — Backend (optional, needs PostgreSQL)
 cd placement-tracker/backend
 cp .env.example .env
 # Edit .env with your local PostgreSQL or Neon URL
 npm install
-npm run prisma:migrate        # creates tables
-npm run prisma:seed           # optional: seed sample data
+npm run prisma:migrate
+npm run prisma:seed
 npm run dev
-
-# Terminal 2 — Frontend
-cd placement-tracker/frontend
-npm install
-npm run dev
+# → http://localhost:3001
 ```
 
 ---
 
-## Architecture Summary
+## Demo Credentials
+
+| Role | Email | Password |
+|------|-------|----------|
+| Admin | admin@college.edu | Admin@1234 |
+| Officer | officer@college.edu | Officer@1234 |
+| Student | riya.sharma@college.edu | Student@1234 |
+
+---
+
+## Architecture
 
 ```
 Vercel Project 1: placement-tracker-frontend
 ├── React + Vite SPA
 ├── vercel.json → rewrites all routes to index.html (SPA routing)
-└── Self-contained: works without backend via browser localStorage
+└── Fully self-contained: cookie-based data store, no backend needed
 
-Vercel Project 2: placement-tracker-backend
-├── Express app exposed as serverless function via src/index.ts
-├── vercel.json → routes all requests to src/index.ts
+Vercel Project 2: placement-tracker-backend  (optional)
+├── Express app → Vercel Serverless via src/index.ts
+├── vercel.json → routes all /api/* to src/index.ts
 ├── Prisma + PostgreSQL (Neon)
-└── JWT auth, rate limiting, audit logs
+└── JWT auth, bcrypt passwords, rate limiting, audit logs
 ```
 
 ---
 
 ## Troubleshooting
 
-**`PrismaClientInitializationError` on Vercel**
-→ Make sure `DATABASE_URL` is set in Vercel environment variables and the Neon database is accessible. Ensure `?sslmode=require` is in the connection string.
+**CORS errors** → Ensure `CLIENT_ORIGIN` in backend exactly matches your frontend URL (no trailing slash).
 
-**CORS errors from frontend**
-→ Make sure `CLIENT_ORIGIN` in the backend matches your frontend's exact Vercel URL (no trailing slash).
+**`PrismaClientInitializationError`** → Make sure `DATABASE_URL` is set in Vercel env vars and includes `?sslmode=require`.
 
-**`prisma generate` not running on Vercel build**
-→ The `vercel-build` script in `package.json` handles this: it runs `prisma generate` before `tsc`.
+**`prisma generate` not running** → The `vercel-build` script in `backend/package.json` handles this automatically.
 
-**SQLite errors**
-→ The project has been migrated to PostgreSQL. Delete any `*.db` files and make sure `DATABASE_URL` points to a PostgreSQL URL.
+**Blank page after deploy** → Check that `vercel.json` in `frontend/` has the SPA rewrite rule (`"source": "/(.*)", "destination": "/index.html"`).
