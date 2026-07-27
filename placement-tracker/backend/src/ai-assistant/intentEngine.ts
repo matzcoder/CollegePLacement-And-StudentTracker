@@ -24,14 +24,15 @@ export function detectIntent(rawInput: string): IntentResult {
     for (const kw of keywords) {
       if (cleaned.includes(kw)) matches++;
     }
-    const score = matches / keywords.length;
+    // Any single keyword match qualifies; more matches = higher confidence
+    const score = matches > 0 ? matches / keywords.length + 0.1 : 0;
     if (score > bestScore) {
       bestScore = score;
       bestIntent = intent;
     }
   }
 
-  if (bestScore < CONFIDENCE_THRESHOLD) {
+  if (bestScore < CONFIDENCE_THRESHOLD || bestIntent === null) {
     return { intent: null, confidence: bestScore };
   }
 

@@ -56,4 +56,4 @@ export const keywordMap: Record<string, string[]> = {
   ],
 };
 
-export const CONFIDENCE_THRESHOLD = 0.3;
+export const CONFIDENCE_THRESHOLD = 0.05;
