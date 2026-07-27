@@ -204,4 +204,4 @@ export const SEED_DATA: AppData = {
   notifications: [],
 };
 
-export const SEED_VERSION = '1';
+export const SEED_VERSION = '2';

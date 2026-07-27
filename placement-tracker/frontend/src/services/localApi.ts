@@ -482,6 +482,9 @@ export async function handleLocalRequest(
         responseText = buildResponse(intent, responseData);
       }
 
+      // Guard: older stored sessions may not have assistantLogs yet
+      if (!Array.isArray(data.assistantLogs)) data.assistantLogs = [];
+
       data.assistantLogs.unshift({
         id: newId('alog'),
         userId: session.userId,
