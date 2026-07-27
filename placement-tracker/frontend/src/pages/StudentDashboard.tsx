@@ -52,7 +52,16 @@ export default function StudentDashboard() {
   const [chatInput, setChatInput] = useState('');
   const [chatBusy, setChatBusy] = useState(false);
   const [chatMessages, setChatMessages] = useState<Array<{ role: string; text: string }>>([]);
+  const [showSuggestions, setShowSuggestions] = useState(true);
   const chatEndRef = useRef<HTMLDivElement>(null);
+
+  const PREDEFINED_QUESTIONS = [
+    { label: '📋 My applications', query: 'Where did I apply?' },
+    { label: '⚡ Shortlist status', query: 'Was I shortlisted?' },
+    { label: '🏆 Offer status', query: 'Did I get an offer?' },
+    { label: '💰 My package', query: 'What is my package?' },
+    { label: '🏢 Companies visited', query: 'How many companies visited campus?' },
+  ];
 
   const flash = (msg: string, ok = true) => {
     setNotification({ msg, ok });
@@ -83,9 +92,25 @@ export default function StudentDashboard() {
     const userMsg = chatInput.trim();
     setChatMessages((m) => [...m, { role: 'user', text: userMsg }]);
     setChatInput('');
+    setShowSuggestions(false);
     setChatBusy(true);
     try {
       const { data } = await api.post<{ response: string }>('/assistant/query', { message: userMsg });
+      setChatMessages((m) => [...m, { role: 'assistant', text: data.response }]);
+    } catch {
+      setChatMessages((m) => [...m, { role: 'assistant', text: 'Sorry, I encountered an error. Please try again.' }]);
+    } finally {
+      setChatBusy(false);
+    }
+  }
+
+  async function sendPredefined(query: string) {
+    if (chatBusy) return;
+    setChatMessages((m) => [...m, { role: 'user', text: query }]);
+    setShowSuggestions(false);
+    setChatBusy(true);
+    try {
+      const { data } = await api.post<{ response: string }>('/assistant/query', { message: query });
       setChatMessages((m) => [...m, { role: 'assistant', text: data.response }]);
     } catch {
       setChatMessages((m) => [...m, { role: 'assistant', text: 'Sorry, I encountered an error. Please try again.' }]);
@@ -291,13 +316,24 @@ export default function StudentDashboard() {
                   <p className="text-indigo-200 text-[9px]">Placement Q&A • Scoped to your data</p>
                 </div>
               </div>
-              <button
-                onClick={() => setChatOpen(false)}
-                className="text-white/60 hover:text-white transition"
-                aria-label="Close assistant"
-              >
-                <X size={16} />
-              </button>
+              <div className="flex items-center gap-2">
+                {chatMessages.length > 0 && (
+                  <button
+                    onClick={() => { setChatMessages([]); setShowSuggestions(true); }}
+                    className="text-white/60 hover:text-white text-[9px] font-semibold border border-white/20 hover:border-white/40 px-2 py-0.5 rounded-md transition"
+                    aria-label="New chat"
+                  >
+                    New chat
+                  </button>
+                )}
+                <button
+                  onClick={() => setChatOpen(false)}
+                  className="text-white/60 hover:text-white transition"
+                  aria-label="Close assistant"
+                >
+                  <X size={16} />
+                </button>
+              </div>
             </div>
 
             {/* Chat Messages */}
@@ -307,17 +343,9 @@ export default function StudentDashboard() {
               aria-live="polite"
             >
               {chatMessages.length === 0 && (
-                <div className="text-center py-6 space-y-2">
-                  <p className="text-slate-500 text-xs font-medium">Ask about your placement journey</p>
-                  {['Where did I apply?', 'Did I get an offer?', 'What is my package?'].map((s) => (
-                    <button
-                      key={s}
-                      onClick={() => { setChatInput(s); }}
-                      className="block w-full text-left text-[10px] text-slate-500 hover:text-indigo-400 hover:bg-indigo-950/30 px-3 py-1.5 rounded-lg transition"
-                    >
-                      💬 {s}
-                    </button>
-                  ))}
+                <div className="text-center py-4 space-y-1.5">
+                  <p className="text-slate-500 text-xs font-medium">👋 Hi! Ask me anything about your placement.</p>
+                  <p className="text-slate-600 text-[10px]">Pick a question below or type your own.</p>
                 </div>
               )}
               {chatMessages.map((msg, i) => (
@@ -344,6 +372,22 @@ export default function StudentDashboard() {
               )}
               <div ref={chatEndRef} />
             </div>
+
+            {/* Predefined Questions */}
+            {showSuggestions && (
+              <div className="px-3 py-2.5 bg-slate-900/80 border-t border-slate-800/60 flex flex-wrap gap-1.5">
+                {PREDEFINED_QUESTIONS.map((q) => (
+                  <button
+                    key={q.query}
+                    onClick={() => sendPredefined(q.query)}
+                    disabled={chatBusy}
+                    className="text-[10px] font-semibold text-slate-300 bg-slate-800 hover:bg-indigo-950/60 hover:text-indigo-300 border border-slate-700 hover:border-indigo-700/60 px-2.5 py-1 rounded-full transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                  >
+                    {q.label}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {/* Chat Input */}
             <form onSubmit={sendChat} className="border-t border-slate-800 flex bg-slate-900">
