@@ -25,24 +25,34 @@ export const keywordMap: Record<string, string[]> = {
     'did i get shortlisted',
     'got shortlisted',
   ],
+  // Change 2 fix: removed bare 'offer' and 'selected' which caused confusion
+  // with package_query; kept only unambiguous offer-outcome phrases
   offer_status: [
-    'offer',
     'did i get an offer',
     'do i have an offer',
-    'got selected',
-    'selected',
     'did i get selected',
+    'got selected',
+    'did i receive an offer',
+    'have i received an offer',
     'placement result',
+    'am i selected',
+    'was i selected',
   ],
+  // Change 2 fix: removed 'my offer package' overlap; strengthened with
+  // salary-specific and amount-specific phrases
   package_query: [
     'package',
     'salary',
     'ctc',
     'how much salary',
     'what is my package',
-    'my offer package',
+    'my salary',
     'compensation',
     'stipend',
+    'how much ctc',
+    'what ctc',
+    'lpa',
+    'lakh',
   ],
   application_status: [
     'application status',
@@ -53,6 +63,22 @@ export const keywordMap: Record<string, string[]> = {
     'interview stage',
     'applied status',
     'show status',
+  ],
+  // Change 1: NEW intent — placement outcome (placed or not)
+  // Recognises "am i placed", "have i been placed", "did i get placed", etc.
+  placement_outcome: [
+    'am i placed',
+    'have i been placed',
+    'did i get placed',
+    'am i a placed student',
+    'placement outcome',
+    'am i finally placed',
+    'got placed',
+    'placement confirmed',
+    'have i got placed',
+    'tell me if i am placed',
+    'am i through',
+    'placement done',
   ],
 };
 
@@ -183,6 +209,24 @@ export function buildResponse(intent: string, data: Record<string, unknown>): st
         .map((a) => `• ${a.company}\n   Stage: ${stageLabel(a.stage)}  |  Status: ${offerLabel(a.offerStatus)}`)
         .join('\n');
       return `📊 Your full placement pipeline:\n\n${list}`;
+    }
+
+    // Change 1: new intent handler
+    case 'placement_outcome': {
+      const apps = data.applications as Array<{ company: string; stage: string; offerStatus: string }> | undefined;
+      if (!apps || apps.length === 0)
+        return "🎓 You haven't applied to any drives yet, so placement status is not available.\n\nContact your placement officer to get enrolled.";
+      const placed = apps.filter((a) => ['offer_accepted', 'selected'].includes(a.offerStatus));
+      if (placed.length > 0) {
+        const list = placed.map((a) => `• ${a.company}  —  ${offerLabel(a.offerStatus)}`).join('\n');
+        return `🎉 Yes! You are placed!\n\n${list}\n\nCongratulations — your hard work paid off!`;
+      }
+      const inProgress = apps.filter((a) => ['shortlisted', 'interview', 'offer'].includes(a.stage));
+      if (inProgress.length > 0) {
+        const list = inProgress.map((a) => `• ${a.company}  —  ${stageLabel(a.stage)}`).join('\n');
+        return `⏳ Not placed yet, but you're actively progressing in ${inProgress.length} ${inProgress.length === 1 ? 'drive' : 'drives'}:\n\n${list}\n\nKeep going — you're close!`;
+      }
+      return "⏳ Not placed yet. You have applications in progress but haven't reached the offer stage.\n\nStay focused and keep applying!";
     }
 
     default:

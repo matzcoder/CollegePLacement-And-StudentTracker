@@ -25,24 +25,32 @@ export const keywordMap: Record<string, string[]> = {
     'did i get shortlisted',
     'got shortlisted',
   ],
+  // Change 2 fix: removed bare 'offer' and 'selected' which confused with package_query
   offer_status: [
-    'offer',
     'did i get an offer',
     'do i have an offer',
-    'got selected',
-    'selected',
     'did i get selected',
+    'got selected',
+    'did i receive an offer',
+    'have i received an offer',
     'placement result',
+    'am i selected',
+    'was i selected',
   ],
+  // Change 2 fix: strengthened with salary/amount-specific terms, removed 'my offer package'
   package_query: [
     'package',
     'salary',
     'ctc',
     'how much salary',
     'what is my package',
-    'my offer package',
+    'my salary',
     'compensation',
     'stipend',
+    'how much ctc',
+    'what ctc',
+    'lpa',
+    'lakh',
   ],
   application_status: [
     'application status',
@@ -53,6 +61,21 @@ export const keywordMap: Record<string, string[]> = {
     'interview stage',
     'applied status',
     'show status',
+  ],
+  // Change 1: NEW intent — placed or not placed outcome
+  placement_outcome: [
+    'am i placed',
+    'have i been placed',
+    'did i get placed',
+    'am i a placed student',
+    'placement outcome',
+    'am i finally placed',
+    'got placed',
+    'placement confirmed',
+    'have i got placed',
+    'tell me if i am placed',
+    'am i through',
+    'placement done',
   ],
 };
 

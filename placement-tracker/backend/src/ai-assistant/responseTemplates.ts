@@ -93,6 +93,24 @@ export function buildResponse(intent: string, data: Record<string, unknown>): st
       return `📊 Your full placement pipeline:\n\n${list}`;
     }
 
+    // Change 1: new intent handler
+    case 'placement_outcome': {
+      const apps = data.applications as AppEntry[] | undefined;
+      if (!apps || apps.length === 0)
+        return "🎓 You haven't applied to any drives yet, so placement status is not available.\n\nContact your placement officer to get enrolled.";
+      const placed = apps.filter((a) => ['offer_accepted', 'selected'].includes(a.offerStatus));
+      if (placed.length > 0) {
+        const list = placed.map((a) => `• ${a.company}  —  ${offerLabel(a.offerStatus)}`).join('\n');
+        return `🎉 Yes! You are placed!\n\n${list}\n\nCongratulations — your hard work paid off!`;
+      }
+      const inProgress = apps.filter((a) => ['shortlisted', 'interview', 'offer'].includes(a.stage));
+      if (inProgress.length > 0) {
+        const list = inProgress.map((a) => `• ${a.company}  —  ${stageLabel(a.stage)}`).join('\n');
+        return `⏳ Not placed yet, but you're actively progressing in ${inProgress.length} ${inProgress.length === 1 ? 'drive' : 'drives'}:\n\n${list}\n\nKeep going — you're close!`;
+      }
+      return "⏳ Not placed yet. You have applications in progress but haven't reached the offer stage.\n\nStay focused and keep applying!";
+    }
+
     default:
       return FALLBACK_RESPONSE;
   }
