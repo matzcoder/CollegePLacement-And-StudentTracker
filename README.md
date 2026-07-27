@@ -458,36 +458,6 @@ The repository contains or should contain the following SIH assessment deliverab
 
 ---
 
-## 🎞️ Presentation Content
-
-The project presentation should include the following points:
-
-1. **The Problem**  
-   Manual placement tracking causes missed deadlines and scattered records.
-
-2. **Who Is Affected**  
-   Students, placement officers, administrators, and companies.
-
-3. **The Solution**  
-   A centralized platform for managing drives, applications, and placement outcomes.
-
-4. **Working Screenshots**  
-   Login, dashboards, drive management, applications, and AI assistant.
-
-5. **Derived Metrics**  
-   Explain placement rate, offer count, shortlisting rate, and drive participation.
-
-6. **What Works**  
-   Role-based portals, drive management, tracking, reporting, and AI queries.
-
-7. **What Is Unfinished**  
-   Production database integration, real notifications, and advanced AI capabilities.
-
-8. **Future Improvement**  
-   Resume parsing, WhatsApp alerts, cloud synchronization, and LLM-based recommendations.
-
----
-
 ## 🔮 Future Enhancements
 
 | Enhancement | Description |
