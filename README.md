@@ -501,18 +501,6 @@ Open:
 ```text
 http://localhost:5173
 ```
-
----
-
-## ▲ Deploy on Vercel
-
-1. Push the project to GitHub.
-2. Open [Vercel](https://vercel.com).
-3. Import the GitHub repository.
-4. Set the root directory:
-
-```text
-placement-tracker/frontend
 ```
 
 5. Click **Deploy**.
