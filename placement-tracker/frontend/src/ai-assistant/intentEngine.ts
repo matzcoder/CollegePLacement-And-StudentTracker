@@ -7,6 +7,17 @@ export const keywordMap: Record<string, string[]> = {
     'how many firms',
     'companies came',
     'companies visited campus',
+    'count of companies',
+    'list of companies',
+    'companies recruiting',
+    'how many drives',
+    'total drives',
+    'companies coming',
+    'firms recruiting',
+    'number of drives',
+    'drives scheduled',
+    'firms visiting',
+    'recruiting',
   ],
   where_applied: [
     'where did i apply',
@@ -16,6 +27,13 @@ export const keywordMap: Record<string, string[]> = {
     'where have i applied',
     'applied companies',
     'my applications',
+    'what did i apply for',
+    'companies i applied to',
+    'tell me my applications',
+    'drives i applied to',
+    'applications i submitted',
+    'drives i submitted',
+    'which companies have i applied',
   ],
   shortlist_status: [
     'shortlisted',
@@ -24,9 +42,13 @@ export const keywordMap: Record<string, string[]> = {
     'shortlist status',
     'did i get shortlisted',
     'got shortlisted',
+    'have i been shortlisted',
+    'show shortlist',
+    'where am i shortlisted',
+    'shortlisted drives',
+    'made it to shortlist',
+    'made it to the shortlist',
   ],
-  // Change 2 fix: removed bare 'offer' and 'selected' which caused confusion
-  // with package_query; kept only unambiguous offer-outcome phrases
   offer_status: [
     'did i get an offer',
     'do i have an offer',
@@ -37,9 +59,12 @@ export const keywordMap: Record<string, string[]> = {
     'placement result',
     'am i selected',
     'was i selected',
+    'offer received',
+    'any offers',
+    'show my offers',
+    'did any company select me',
+    'offer details',
   ],
-  // Change 2 fix: removed 'my offer package' overlap; strengthened with
-  // salary-specific and amount-specific phrases
   package_query: [
     'package',
     'salary',
@@ -53,6 +78,11 @@ export const keywordMap: Record<string, string[]> = {
     'what ctc',
     'lpa',
     'lakh',
+    'what is my ctc',
+    'how much will i earn',
+    'package details',
+    'pay details',
+    'my earnings',
   ],
   application_status: [
     'application status',
@@ -63,9 +93,11 @@ export const keywordMap: Record<string, string[]> = {
     'interview stage',
     'applied status',
     'show status',
+    'track my application',
+    'application progress',
+    'where do i stand',
+    'my drive status',
   ],
-  // Change 1: NEW intent — placement outcome (placed or not)
-  // Recognises "am i placed", "have i been placed", "did i get placed", etc.
   placement_outcome: [
     'am i placed',
     'have i been placed',
@@ -79,6 +111,11 @@ export const keywordMap: Record<string, string[]> = {
     'tell me if i am placed',
     'am i through',
     'placement done',
+    'placed or not',
+    'did i secure placement',
+    'final placement status',
+    'secure a placement',
+    'secured placement',
   ],
 };
 

@@ -61,6 +61,7 @@ export default function StudentDashboard() {
     { label: '🏆 Offer status', query: 'Did I get an offer?' },
     { label: '💰 My package', query: 'What is my package?' },
     { label: '🏢 Companies visited', query: 'How many companies visited campus?' },
+    { label: '🎓 Am I placed?', query: 'Am I placed?' },
   ];
 
   const flash = (msg: string, ok = true) => {
