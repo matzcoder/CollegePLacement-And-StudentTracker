@@ -1,15 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
+import { getSession, setSession, encodeSessionToken } from '../services/dataStore';
 
-export interface User {
+interface User {
   id: string;
   name: string;
-  fullName?: string;
   email: string;
   role: 'student' | 'officer' | 'admin';
-  rollNumber?: string;
-  department?: string;
-  cgpa?: number;
 }
 
 interface AuthContextValue {
@@ -23,61 +20,38 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(() => {
-    try {
-      const stored = localStorage.getItem('user');
-      return stored ? JSON.parse(stored) : null;
-    } catch {
-      return null;
-    }
-  });
-  const [token, setToken] = useState<string | null>(() => localStorage.getItem('token'));
+  const [user, setUser] = useState<User | null>(null);
+  const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const checkAuth = useCallback(async () => {
-    try {
-      const storedToken = localStorage.getItem('token');
-      if (storedToken) {
-        api.defaults.headers.common['Authorization'] = `Bearer ${storedToken}`;
-      }
-      const { data } = await api.get<User>('/auth/me');
-      if (data) {
-        setUser(data);
-        localStorage.setItem('user', JSON.stringify(data));
-      }
-    } catch (err) {
-      console.warn('Session verification failed, clearing stale auth data');
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      setUser(null);
-      setToken(null);
-    } finally {
-      setIsLoading(false);
+  useEffect(() => {
+    const session = getSession();
+    if (session) {
+      const sessionToken = encodeSessionToken(session);
+      setToken(sessionToken);
+      setUser({
+        id: session.userId,
+        name: session.name,
+        email: session.email,
+        role: session.role,
+      });
+      api.defaults.headers.common['Authorization'] = `Bearer ${sessionToken}`;
     }
+    setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    checkAuth();
-  }, [checkAuth]);
-
   const login = useCallback(async (email: string, password: string) => {
-    const { data } = await api.post<{ token: string; role: string; user: User }>('/auth/login', {
-      email,
-      password,
-    });
-
-    const userObj = {
-      ...data.user,
-      name: data.user.fullName || data.user.name,
-      role: data.role.toLowerCase() as 'student' | 'officer' | 'admin',
-    };
-
+    const { data } = await api.post<{ token: string; role: string; user: User }>('/auth/login', { email, password });
     setToken(data.token);
-    setUser(userObj);
-
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(userObj));
+    setUser(data.user);
     api.defaults.headers.common['Authorization'] = `Bearer ${data.token}`;
+
+    setSession({
+      userId: data.user.id,
+      name: data.user.name,
+      email: data.user.email,
+      role: data.user.role,
+    });
   }, []);
 
   const logout = useCallback(async () => {
@@ -88,10 +62,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
     setToken(null);
     setUser(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
+    setSession(null);
     delete api.defaults.headers.common['Authorization'];
   }, []);
+
+  useEffect(() => {
+    if (token) api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  }, [token]);
 
   return (
     <AuthContext.Provider value={{ user, token, login, logout, isLoading }}>

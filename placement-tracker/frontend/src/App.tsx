@@ -1,10 +1,7 @@
-import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { PlacementProvider } from './context/PlacementContext';
 import LoginPage from './pages/LoginPage';
 import StudentDashboard from './pages/StudentDashboard';
-import OfficerDashboard from './pages/OfficerDashboard';
 import AdminDashboard from './pages/AdminDashboard';
 
 function ProtectedRoute({ children, roles }: { children: React.ReactNode; roles: string[] }) {
@@ -35,18 +32,15 @@ function AppRoutes() {
     );
   }
 
-  const getHomeRoute = () => {
-    if (!user) return '/login';
-    if (user.role === 'student') return '/student';
-    if (user.role === 'officer') return '/officer';
-    return '/admin';
-  };
-
   return (
     <Routes>
       <Route
         path="/login"
-        element={user ? <Navigate to={getHomeRoute()} replace /> : <LoginPage />}
+        element={
+          user
+            ? <Navigate to={user.role === 'student' ? '/student' : '/admin'} replace />
+            : <LoginPage />
+        }
       />
       <Route
         path="/student"
@@ -57,22 +51,21 @@ function AppRoutes() {
         }
       />
       <Route
-        path="/officer"
-        element={
-          <ProtectedRoute roles={['officer', 'admin']}>
-            <OfficerDashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route
         path="/admin"
         element={
-          <ProtectedRoute roles={['admin', 'officer']}>
+          <ProtectedRoute roles={['officer', 'admin']}>
             <AdminDashboard />
           </ProtectedRoute>
         }
       />
-      <Route path="/" element={<Navigate to={getHomeRoute()} replace />} />
+      <Route
+        path="/"
+        element={
+          user
+            ? <Navigate to={user.role === 'student' ? '/student' : '/admin'} replace />
+            : <Navigate to="/login" replace />
+        }
+      />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
@@ -82,9 +75,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <PlacementProvider>
-          <AppRoutes />
-        </PlacementProvider>
+        <AppRoutes />
       </AuthProvider>
     </BrowserRouter>
   );
